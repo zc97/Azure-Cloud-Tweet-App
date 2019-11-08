@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello World</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+          crossorigin="anonymous">
+    <style>
+        body {
+            padding-top:40px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1 class="display-4 mb-4">What's your name?</h1>
+    <hr>
+    <div id="output"></div>
+    <form id="submitMessage">
+        <div class="form-group">
+            <input type="text" id="name" class="form-control" placeholder="Type your id...">
+        </div>
+        <input type="submit" class="btn btn-secondary" value="Submit">
+    </form>
+</div>
+
+<script>
+    document.getElementById('submitMessage').addEventListener('submit', submitMessage);
+
+    function processResponse(response) {
+        if (response.status === 200) {
+            output =
+                `
+                 <div class="alert alert-success" role="alert">
+                 Hello, ${document.getElementById('name').value}! It's nice to meet you!
+                 ${response.body}
+                 </div>
+                `;
+            document.getElementById('output').innerHTML = output;
+        } else {
+            output =
+                `
+                 <div class="alert alert-danger" role="alert">
+                 Oh no! Something went wrong :(
+                 </div>
+                `;
+            document.getElementById('output').innerHTML = output;
+        }
+    }
+
+    function submitMessage(e) {
+        e.preventDefault();
+        let name = document.getElementById('name').value;
+        let url = "https://cad-firstfunction.azurewebsites.net/api/getAllInfo?code=lZq1ZO33rR4GeE7aFSFYwUprTZ2Phj2v91S0LjpEOa2Nnk2Nzqiaxw=="+"&id="+name;
+        fetch(url
+            , {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name
+            }),
+
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                let output = ` <div>name: </div>`
+                // document.getElementById('output').innerHTML = `<div id="output">${data.lastName}</div>`;
+                // document.getElementById('output').innerHTML = data;
+                data.forEach(function(user){
+                    output += `<div>${user.lastName}</div>`
+                })
+                document.getElementById('output').innerHTML = output;
+                })
+    }
+
+</script>
+</body>
+
+</html>
