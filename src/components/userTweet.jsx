@@ -34,7 +34,7 @@ class UserTweet extends React.Component{
                         <Card.Content>
                             <img class="right floated mini ui image" src="https://img.icons8.com/plasticine/100/000000/user.png"/>
                             <Card.Header>{tweet.name} </Card.Header>
-                            <Card.Meta>Friends of Elliot</Card.Meta>
+                            <Card.Meta>{tweet.date}</Card.Meta>
                             <Card.Description>
                             <h3>{tweet.content}</h3>
                             </Card.Description>

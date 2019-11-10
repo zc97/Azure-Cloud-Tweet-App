@@ -1,5 +1,5 @@
 import React from 'react';
-import Tweet from "./tweet";
+import Login from "./login"
 
 class Signup extends React.Component{
 
@@ -8,7 +8,7 @@ class Signup extends React.Component{
         userName:"",
         password:"",
         confirmationPassword:"",
-        token:0
+        login:0
     }
 
     userIDChangeHandler = (event) => {
@@ -30,33 +30,30 @@ class Signup extends React.Component{
     sumbitHandler = () => {
         if(this.state.password === this.state.confirmationPassword){
             alert("signup successfully");
-            this.setState({token:1});
+            this.setState({login:1});
         } else {
             alert("password not confirmed");
         }
     }
 
     loginListener = () => {
-
-        if (this.state.token === 0) return (
-        <div>
-                Email:
-                <input type="text" onChange={this.userIDChangeHandler}/>
-                User Name:
-                <input type="text" onChange={this.userNameChangeHandler}/>
-                Password:
-                <input type="password" onChange={this.passwordChangeHandler}/>
-                Confirmation Password:
-                <input type="password" onChange={this.passwordConfirmationChangeHandler}/>
-                <button onClick = {this.sumbitHandler}>sign up</button>
-        </div>
-        );
-        if (this.state.token === 1) return (
-                <Tweet userID = {this.state.userID}/>
-        );
+        return(
+            <div>
+                    Email:
+                    <input type="text" onChange={this.userIDChangeHandler}/>
+                    User Name:
+                    <input type="text" onChange={this.userNameChangeHandler}/>
+                    Password:
+                    <input type="password" onChange={this.passwordChangeHandler}/>
+                    Confirmation Password:
+                    <input type="password" onChange={this.passwordConfirmationChangeHandler}/>
+                    <button onClick = {this.sumbitHandler}>sign up</button>
+            </div>
+        )
     }
 
     render(){
+        if(this.state.login===1) return <Login/>
         return(
             <div>
             {this.loginListener()}

@@ -22,14 +22,14 @@ class Following extends React.Component{
 
     //conditional rendering
     redenrFollowing = () => {
-        if (this.state.followingID.length === 0) return <h1> there is no following </h1>;
-        return <ul> {this.state.followingID.map(user => 
+        if (this.state.followingID.length === 0) return <h3> Currently Not Have Following </h3>;
+        return <ul> {this.state.followingName.map(user => 
             <div class="ui relaxed divided list">
                 <div class="item">
                     <i class="large user circle middle aligned icon"></i>
                     <div class="content">
-                        <a class="header"></a>
-                        <div class="description">{user.followingID}</div>
+                        <a class="header">{user.Name}</a>
+                        <div class="description">{user.UserID}</div>
                     </div>
                 </div>
             </div>
